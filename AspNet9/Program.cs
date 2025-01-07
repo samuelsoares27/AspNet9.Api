@@ -84,18 +84,15 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.OAuthClientId("your-client-id");
-        c.OAuthAppName("Your App");
-    });
+    app.UseSwaggerUI();
     app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication(); // Processa autenticação
+app.UseAuthorization();  // Processa autorização
+app.MapControllers();    // Mapeia controladores
 
-app.UseAuthentication(); // Middleware de autenticação
-app.UseAuthorization();  // Middleware de autorização
 
 app.MapControllers();
 
